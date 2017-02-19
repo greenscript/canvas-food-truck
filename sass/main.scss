@@ -1,0 +1,43 @@
+@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+
+.flex-center {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
+.banner {
+  &-container {
+    background: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)), url(../images/lasagna.jpg);
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    height: 100vh;
+  }
+  &-title {
+    &-container {
+      align-self: flex-start;
+    }
+  }
+  &-main {
+    &-title {
+      padding: 1em;
+      background-color: yellow;
+      border-radius: 1em;
+      color: grey;
+    }
+  }
+}
+
+canvas {
+  background-color: #ecf0f1;
+}
