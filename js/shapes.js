@@ -52,9 +52,9 @@ Ball.prototype.getBounds = function () {
  * @constructor
  * @param {Vector} position - Defines the position of the circle.
  * @param {number} radius - Radius for the shape.
- * @param {boolea} hasFill - Set the circle to show the fill.  
+ * @param {boolea} hasFill - Set the circle to show the fill.
  * @param {string} fillColor - Color for the shape.
- * @param {boolea} hasStroke - Set the circle to show the stroke. 
+ * @param {boolea} hasStroke - Set the circle to show the stroke.
  * @param {string} strokeColor - Stroke color for the shape.
  * @param {number} lineWidth - Stroke line size.
  * @param {CanvasRenderingContext2D} context - The 2d rendering context from the canvas.
@@ -119,9 +119,9 @@ Circle.prototype.getBounds = function () {
  * @param {number} radiusX - Radius x for the shape.
  * @param {number} radiusY - Radius y for the shape.
  * @param {number} rotation - Rotation for the shape in radians.
- * @param {boolea} hasFill - Set the circle to show the fill.  
+ * @param {boolea} hasFill - Set the circle to show the fill.
  * @param {string} fillColor - Color for the shape.
- * @param {boolea} hasStroke - Set the circle to show the stroke. 
+ * @param {boolea} hasStroke - Set the circle to show the stroke.
  * @param {string} strokeColor - Stroke color for the shape.
  * @param {number} lineWidth - Stroke line size.
  * @param {CanvasRenderingContext2D} context - The 2d rendering context from the canvas.
@@ -261,17 +261,17 @@ Box.prototype.getBounds = function () {
  * @param {Vector} position - Defines the position of the shape.
  * @param {number} width - Width for the shape.
  * @param {number} height - Height for the shape.
- * @param {boolea} hasFill - Set the shape to show the fill.  
+ * @param {boolea} hasFill - Set the shape to show the fill.
  * @param {string} fillColor - Color for the shape.
- * @param {boolea} hasStroke - Set the shape to show the stroke. 
+ * @param {boolea} hasStroke - Set the shape to show the stroke.
  * @param {string} strokeColor - Stroke color for the shape.
  * @param {number} lineWidth - Stroke line size.
  * @param {CanvasRenderingContext2D} context - The 2d rendering context from the canvas.
  */
-function Rectangle(position, width, height, hasFill, fillColor, hasStroke, strokeColor, lineWidth, context) {
+function Rectangle(position, width, height, hasFill, fillColor, hasStroke, strokeColor, lineWidth, context, move) {
 
     if (!(this instanceof Rectangle)) {
-        return new Rectangle(position, width, height, hasFill, fillColor, hasStroke, strokeColor, lineWidth, context);
+        return new Rectangle(position, width, height, hasFill, fillColor, hasStroke, strokeColor, lineWidth, context, move);
     }
 
     this.position = position;
@@ -283,6 +283,7 @@ function Rectangle(position, width, height, hasFill, fillColor, hasStroke, strok
     this.strokeColor = strokeColor;
     this.lineWidth = lineWidth;
     this.context = context;
+    this.move = move;
     this.update();
 }
 
@@ -309,13 +310,25 @@ Rectangle.prototype.render = function () {
         this.context.strokeRect(this.position.x, this.position.y, this.width, this.height);
     }
 
+
+
     this.context.closePath();
 }
 
 Rectangle.prototype.update = function () {
+    if (this.move) {
+      this.position.x += -3;
+    }
+
+    this.checkBound();
     this.render();
 }
 
+Rectangle.prototype.checkBound = function () {
+    if (this.position.x < -250) {
+        this.position.x = 2100;
+    }
+}
 
 Rectangle.prototype.getBounds = function () {
     return Rect(this.position.x, this.position.y, this.width, this.height);
@@ -534,9 +547,9 @@ RoundRect.prototype.render = function () {
  * @param {number} w - Width for the shape.
  * @param {number} h - Height for the shape.
  * @param {number} cr - Radius for the corner.
- * @param {boolea} hasFill - Set the shape to show the fill.  
+ * @param {boolea} hasFill - Set the shape to show the fill.
  * @param {string} c - Color for the shape.
- * @param {boolea} hasStroke - Set the shape to show the stroke. 
+ * @param {boolea} hasStroke - Set the shape to show the stroke.
  * @param {string} sc - Stroke color for the shape.
  * @param {number} lw - Stroke line width size.
  * @param {CanvasRenderingContext2D} ctx - The 2d rendering context from the canvas.
