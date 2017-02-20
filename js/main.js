@@ -33,6 +33,7 @@ function drawBuildings () {
   let windowY   = -175;
   let i = 1;
   let iWindows = 1;
+  let animationId = 0;
 
   while(i < 6) {
     let building = Rectangle(Vector(buildingX, buildingY), 150, 400, true, '#95a5a6', true, '#7f8c8d', 3, ctx, true);
@@ -52,10 +53,7 @@ function drawBuildings () {
     }
   }
 
-  let animationId = 0;
   function update() {
-    buildingX = -600;
-    buildingY = -170;
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
     buildings.forEach(function (building) {
         building.update();
@@ -369,10 +367,5 @@ function drawBuildings () {
 
   }
 }
-
-// function drawWindows () {
-
-//
-// }
 
 drawBuildings();
