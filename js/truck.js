@@ -11,27 +11,40 @@ function Truck(position, context) {
         return new Truck(position, context);
     }
 
-    this.topColor = '#e33335';
-    this.bottomColor = '#167b15';
+    this.topColor = 'lightblue';
+    this.bottomColor = 'pink';
     this.windowColor = '#454545';
     this.color1 = 'orangered';
     this.context = context;
     this.position = position;
     this.truckWidth = 230;
     this.angle = 0;
+    this.velocity = Vector(0, 0);
 
     //Wheel Left
-    this.wheell = Wheel(Vector(this.position.x + 60, this.position.y + 170), this.context);
+    this.wlpos = Vector(this.position.x + 60, this.position.y + 170);
+    this.wheell = Wheel(this.wlpos, this.context);
 
     //Wheel Right
-    this.wheelr = Wheel(Vector(this.position.x + 215, this.position.y + 170), this.context);
+    this.wrpos = Vector(this.position.x + 215, this.position.y + 170)
+    this.wheelr = Wheel(this.wrpos, this.context);
 }
 
 Truck.prototype.update = function () {
+    // this.angle += 2;
+    // this.position.y += Math.cos(this.angle / 10);
+    // this.position.x += Math.sin(this.angle / 10);
+    this.position.add(this.velocity);
 
     this.render();
-    this.wheell.update();
-    this.wheelr.update();
+    this.wlpos = Vector(this.position.x + 60, this.position.y + 170);
+    // this.wlpos.y += Math.cos(this.angle / 3);
+    // this.wlpos.x += Math.sin(this.angle / 3);
+    this.wheell.update(this.wlpos);
+    this.wrpos = Vector(this.position.x + 215, this.position.y + 170)
+    // this.wrpos.y += Math.cos(this.angle / 2);
+    // this.wrpos.x += Math.sin(this.angle / 2);
+    this.wheelr.update(this.wrpos);
 }
 
 Truck.prototype.render = function () {
@@ -178,6 +191,7 @@ Truck.prototype.render = function () {
 }
 
 function ShapePoint(p, cr) {
+
     if (!(this instanceof ShapePoint)) {
         return new ShapePoint(p, cr);
     }

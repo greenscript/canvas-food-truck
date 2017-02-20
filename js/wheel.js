@@ -6,11 +6,11 @@ function Wheel(position, context) {
     this.context = context;
     this.position = position;
     this.degree = 0;
-    this.update();
 }
 
-Wheel.prototype.update = function () {
-    this.degree += 10;
+Wheel.prototype.update = function (position) {
+    this.position = position;
+    this.degree += 8;
     this.render();
 }
 

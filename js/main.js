@@ -3,6 +3,8 @@ let ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = 400;
 ctx.translate(canvas.width / 2, canvas.height / 2);
+let truck = Truck(Vector(canvas.width / 2.5, 200), ctx);
+
 
 function getTime () {
   let time = new Date().getHours();
@@ -22,18 +24,13 @@ let canvasSky = (getTime() === 'am') ? 'rgba(52, 152, 219, 0.8)' : 'rgba(44, 62,
 
 document.getElementById("canvas").style.backgroundColor = canvasSky;
 
-function drawTruck () {
-  let truck = Truck(Vector(canvas.width / 2.5, 200), ctx);
-  truck.update();
-}
-
 function drawBuildings () {
   let buildings = [];
-  let windows   = [];
   let buildingX = 600;
   let buildingY = 10;
-  let windowX = 610;
-  let windowY = -175;
+  let windows   = [];
+  let windowX   = 610;
+  let windowY   = -175;
   let i = 1;
   let iWindows = 1;
 
@@ -67,8 +64,7 @@ function drawBuildings () {
       window.update();
     }, this);
 
-    drawTruck();
-
+    truck.update();
     animationId = requestAnimationFrame(update);
   }
 
@@ -373,5 +369,10 @@ function drawBuildings () {
 
   }
 }
+
+// function drawWindows () {
+
+//
+// }
 
 drawBuildings();

@@ -1,5 +1,9 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 
+html {
+  background-color: #e67e22;
+}
+
 .flex-center {
   display: flex;
   flex-wrap: wrap;
@@ -11,19 +15,13 @@
   padding: 0;
 }
 
-* {
-  font-family: 'Roboto', sans-serif;
+h1, p  {
+  font-family: 'Barrio', cursive;
 }
 
 .banner {
-  &-container {
-    background: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)), url(../images/lasagna.jpg);
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    height: 100vh;
-  }
   &-title {
+    margin: 0;
     &-container {
       align-self: flex-start;
     }
@@ -31,10 +29,177 @@
   &-main {
     &-title {
       padding: 1em;
-      background-color: yellow;
+      background-color: #FFDC00;
       border-radius: 1em;
-      color: grey;
+      color: #e67e22;
+      font-weight: bold;
+      font-size: 40px;
+      margin: 20px 0;
     }
+  }
+  &-info {
+    padding: 2.5em 0 1.5em;
+    background-color: #FFDC00;
+    color: #e67e22;
+    p {
+      font-size: 30px;
+      font-weight: bold
+    }
+  }
+  &-canvas {
+    height: 400px;
+  }
+  &-social {
+    list-style-type: none;
+    padding: 1em 0;
+    li {
+      display: inline-block;
+      font-size: 30px;
+      padding: 0 20px;
+      &:hover {
+        transform: rotate(360deg);
+        transition: 1.3s all;
+      }
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+      i {
+        &:hover {
+          transform: rotate(360deg);
+          transition: 1.3s all;
+        }
+      }
+    }
+  }
+}
+
+.tomato {
+  background: #FF6347;
+  height: 50px;
+  width: 100px;
+  border-radius: 0 0 50px 50px;
+  position: relative;
+  transition: all .3s ease-in-out;
+  box-shadow: 2px 2px 0 white, -2px 2px 0 white;
+  margin-bottom: -35px;
+  &-container {
+    &-one {
+      position: absolute;
+      z-index: 99999;
+      top: 8%;
+      left: 5%;
+    }
+    &-two {
+      position: absolute;
+      z-index: 99999;
+      top: 8%;
+      right: 5%;
+    }
+  }
+  &-left {
+    transform: rotate(-20deg);
+  }
+  &-right {
+    transform: rotate(20deg);
+  }
+  &:before {
+    content: "";
+    width: 32px;
+    height: 32px;
+    background: #FF6347;
+    position: absolute;
+    border-radius: 0 32px 0 0;
+    top: -28px;
+    right: 0;
+    transition: all .2s ease-in-out;
+    box-shadow: 2px -2px 0 white;
+  }
+  &:after {
+    content: "";
+    width: 32px;
+    height: 32px;
+    background: #FF6347;
+    position: absolute;
+    border-radius: 32px 0 0 0;
+    top: -28px;
+    transition: all .2s ease-in-out;
+    box-shadow: -2px -2px 0 white;
+  }
+  &-top {
+    background: #A8B848;
+    height: 16px;
+    width: 16px;
+    border-radius: 16px 0 16px 0;
+    position: absolute;
+    transform: rotateZ(135deg);
+    top: -16px;
+    z-index: 1;
+    left: 41px;
+    transition: all .2s ease-in-out;
+    &:before {
+      content: "";
+      background: #A8B848;
+      height: 16px;
+      width: 16px;
+      border-radius: 16px 0 16px 0;
+      position: absolute;
+      z-index: 1;
+      transform: rotateZ(90deg);
+      top: 12px;
+      transition: all .2s ease-in-out;
+    }
+    &:after {
+      content: "";
+      background: #A8B848;
+      height: 16px;
+      width: 16px;
+      border-radius: 16px 0 16px 0;
+      position: absolute;
+      z-index: 1;
+      transform: rotateZ(90deg);
+      top: -2px;
+      right: 13px;
+      transition: all .2s ease-in-out;
+    }
+  }
+  &-fill {
+    width: 40px;
+    height: 22px;
+    background: #FF6347;
+    position: absolute;
+    top: -16px;
+    left: 30px;
+    transition: all .2s ease-in-out;
+    &:before {
+      content: "";
+      width: 20px;
+      height: 16px;
+      background: #FF6347;
+      position: absolute;
+      border-radius: 0 16px 0 0;
+      top: -12px;
+      left: -2px;
+      transition: all .2s ease-in-out;
+      box-shadow: 2px -2px 0 white;
+    }
+    &:after {
+      content: "";
+      width: 20px;
+      height: 16px;
+      background: #FF6347;
+      position: absolute;
+      border-radius: 16px 0 0 0;
+      top: -12px;
+      right: -2px;
+      transition: all .2s ease-in-out;
+      box-shadow: -2px -2px 0 white;
+    }
+  }
+  &:hover {
+    transition: 1.5s all;
+    transform: scale(1.2);
+    transform: rotate(360deg);
   }
 }
 
