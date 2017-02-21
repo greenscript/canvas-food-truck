@@ -5,26 +5,22 @@ canvas.height = 400;
 ctx.translate(canvas.width / 2, canvas.height / 2);
 let truck = Truck(Vector(canvas.width / 2.5, 200), ctx);
 
-
 function getTime () {
   let time = new Date().getHours();
-  let hours = (time + 24 - 2) % 24;
   let mid = 'am';
-  if (hours === 0) {
-    hours = 12;
-  } else if (hours > 12) {
-    hours = hours % 12;
+  if (time > 16) {
     mid = 'pm';
   }
   return mid;
 }
 
-let windowColor = (getTime() === 'am') ? '#FFF' : 'rgba(241, 196, 15, 1)';
+let windowColor = (getTime() === 'am') ? '#add8e6' : 'rgba(241, 196, 15, 1)';
 let canvasSky = (getTime() === 'am') ? 'rgba(52, 152, 219, 0.8)' : 'rgba(44, 62, 80, 0.8)';
+let leavesColor = (getTime() === 'am') ? '#329932' : '#019875';
 
 document.getElementById("canvas").style.backgroundColor = canvasSky;
 
-function drawBuildings () {
+function draw () {
   let buildings = [];
   let buildingX = 600;
   let buildingY = 10;
@@ -34,6 +30,68 @@ function drawBuildings () {
   let i = 1;
   let iWindows = 1;
   let animationId = 0;
+  let trees = [];
+  let treePositionX = 50;
+  let iTrees = 1;
+  let treeYone = 500;
+  let treeYtwo = 300;
+  let leaveY = 300;
+
+
+  while(iTrees < 9) {
+    let tree = Tree(Vector(treePositionX, treeYone), Vector(treePositionX, treeYtwo), 15, 'square', '#614126', ctx, Vector(treePositionX, leaveY), 35, leavesColor, true);
+
+    treePositionX = treePositionX + 100;
+
+    tree.update();
+    trees.push(tree);
+    iTrees++;
+
+    switch(iTrees) {
+      case 2:
+        treeYone = treeYone - 50;
+        treeYtwo = treeYtwo - 50;
+        leaveY = leaveY - 50;
+        break;
+      case 3:
+        treeYone =  500;
+        treeYtwo =  300;
+        leaveY =  300;
+        break;
+      case 4:
+        treePositionX = treePositionX + 420;
+        treeYone = treeYone - 50;
+        treeYtwo = treeYtwo - 50;
+        leaveY = leaveY - 50;
+        break;
+      case 5:
+       treePositionX  = treePositionX + 430;
+       treeYone = treeYone - 50;
+       treeYtwo = treeYtwo - 50;
+       leaveY = leaveY - 50;
+       break;
+      case 6:
+       treePositionX  = treePositionX + 430;
+       treeYone =  500;
+       treeYtwo =  300;
+       leaveY =  300;
+       break;
+      case 7:
+       treePositionX  = treePositionX + 390;
+       treeYone = treeYone - 50;
+       treeYtwo = treeYtwo - 50;
+       leaveY = leaveY - 50;
+       break;
+      case 8:
+       treePositionX  = treePositionX - 190;
+       treeYone =  500;
+       treeYtwo =  300;
+       leaveY =  300;
+       break;
+
+    }
+
+  }
 
   while(i < 6) {
     let building = Rectangle(Vector(buildingX, buildingY), 150, 400, true, '#95a5a6', true, '#7f8c8d', 3, ctx, true);
@@ -58,11 +116,17 @@ function drawBuildings () {
     buildings.forEach(function (building) {
         building.update();
     }, this);
+
     windows.forEach(function (window) {
       window.update();
     }, this);
 
+    trees.forEach(function (tree) {
+      tree.update();
+    }, this);
+
     truck.update();
+
     animationId = requestAnimationFrame(update);
   }
 
@@ -368,4 +432,4 @@ function drawBuildings () {
   }
 }
 
-drawBuildings();
+draw();
