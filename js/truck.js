@@ -11,8 +11,8 @@ function Truck(position, context) {
         return new Truck(position, context);
     }
 
-    this.topColor = 'lightblue';
-    this.bottomColor = 'pink';
+    this.topColor = '#e67e22';
+    this.bottomColor = '#ffdc00';
     this.windowColor = '#454545';
     this.color1 = 'orangered';
     this.context = context;
@@ -188,6 +188,51 @@ Truck.prototype.render = function () {
     this.context.arc(this.position.x + 215, this.position.y + 170, 35, Math.PI, Math.PI * 2, false);
     this.context.closePath();
     this.context.fill();
+
+    //Lasagna
+
+    let xpos = this.position.x + 100;
+    let ypos = this.position.y - 38;
+
+
+    this.context.beginPath();
+    this.context.fillStyle = '#ffdc00';
+    this.context.fillRect(xpos,ypos, 100, 38);
+    this.context.fill();
+    this.context.closePath();
+
+    //layers
+    this.context.strokeStyle = '#CF000F';
+    this.context.lineWidth = 8;
+    this.context.beginPath();
+    this.context.moveTo(xpos, ypos);
+    this.context.quadraticCurveTo(xpos + 10, ypos + 4, xpos + 20, ypos);
+    this.context.quadraticCurveTo(xpos + 30, ypos - 8, xpos + 40, ypos);
+    this.context.quadraticCurveTo(xpos + 50, ypos + 6, xpos + 60, ypos);
+    this.context.quadraticCurveTo(xpos + 70, ypos - 5, xpos + 80, ypos);
+    this.context.quadraticCurveTo(xpos + 90, ypos + 7, xpos + 100, ypos);
+    this.context.stroke();
+
+    ypos += 14;
+    this.context.strokeStyle = '#F22613';
+    this.context.beginPath();
+    this.context.moveTo(xpos, ypos);
+    this.context.quadraticCurveTo(xpos + 10, ypos + 4, xpos + 20, ypos);
+    this.context.quadraticCurveTo(xpos + 30, ypos - 6, xpos + 40, ypos);
+    this.context.quadraticCurveTo(xpos + 50, ypos + 10, xpos + 60, ypos);
+    this.context.quadraticCurveTo(xpos + 70, ypos - 6, xpos + 80, ypos);
+    this.context.quadraticCurveTo(xpos + 90, ypos + 7, xpos + 100, ypos);
+    this.context.stroke();
+
+    ypos += 14;
+    this.context.beginPath();
+    this.context.moveTo(xpos, ypos);
+    this.context.quadraticCurveTo(xpos + 10, ypos + 10, xpos + 20, ypos);
+    this.context.quadraticCurveTo(xpos + 30, ypos - 5, xpos + 40, ypos);
+    this.context.quadraticCurveTo(xpos + 50, ypos + 6, xpos + 60, ypos);
+    this.context.quadraticCurveTo(xpos + 70, ypos - 8, xpos + 80, ypos);
+    this.context.quadraticCurveTo(xpos + 90, ypos + 9, xpos + 100, ypos);
+    this.context.stroke();
 }
 
 function ShapePoint(p, cr) {

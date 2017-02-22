@@ -15,28 +15,98 @@ function getTime () {
 }
 
 let windowColor = (getTime() === 'am') ? '#add8e6' : 'rgba(241, 196, 15, 1)';
-let canvasSky = (getTime() === 'am') ? 'rgba(52, 152, 219, 0.8)' : 'rgba(44, 62, 80, 0.8)';
+let canvasSky = (getTime() === 'am')   ? 'rgba(52, 152, 219, 0.8)' : 'rgba(44, 62, 80, 0.8)';
 let leavesColor = (getTime() === 'am') ? '#329932' : '#019875';
+let cloudColor = (getTime() === 'am')  ? '#ecf0f1' : '#7f8c8d';
 
-document.getElementById("canvas").style.backgroundColor = canvasSky;
+canvas.style.backgroundColor = canvasSky;
 
 function draw () {
-  let buildings = [];
+  let pool = [];
   let buildingX = 600;
   let buildingY = 10;
-  let windows   = [];
   let windowX   = 610;
   let windowY   = -175;
-  let i = 1;
-  let iWindows = 1;
-  let animationId = 0;
-  let trees = [];
   let treePositionX = 50;
-  let iTrees = 1;
   let treeYone = 500;
   let treeYtwo = 300;
   let leaveY = 300;
+  let cloudX = 0;
+  let cloudY = 50;
+  let animationId = 0;
+  let iWindows = 1;
+  let iClouds = 1;
+  let iTrees = 1;
+  let i = 1;
 
+  while(i < 6) {
+    let building = Rectangle(Vector(buildingX, buildingY), 150, 400, true, '#95a5a6', true, '#7f8c8d', 3, ctx, true);
+    let door = Rectangle(Vector(buildingX + 58, 358), 30, 40, true, '#22313F', true, '#34495E', 2, ctx, true);
+
+    buildingX = buildingX + 250;
+    buildingY = buildingY + 30;
+    building.update();
+    pool.push(building);
+    pool.push(door);
+
+    i++;
+
+    switch(i) {
+      case 3:
+      case 5:
+        buildingY = buildingY - 50;
+        break;
+    }
+  }
+
+  while(iClouds < 20) {
+    let cloud = Cloud(Vector(cloudX,cloudY), 20, cloudColor, true, ctx);
+    cloudX = cloudX + 15;
+    cloudY = cloudY;
+    pool.push(cloud);
+    iClouds++;
+
+    if (iClouds === 8) {
+      cloudX = 1900 + 15;
+    }
+
+    if (iClouds === 14) {
+      cloudX = 360 + 15;
+    }
+
+    switch(iClouds) {
+      case 2:
+      case 4:
+      case 6:
+        cloudY = 50 - 10;
+        break;
+      case 3:
+      case 5:
+      case 7:
+        cloudY = 50 + 20;
+        break;
+      case 8:
+      case 10:
+      case 12:
+        cloudY = 50 - 10;
+        break;
+      case 9:
+      case 11:
+      case 13:
+        cloudY = 50 + 20;
+        break;
+      case 14:
+      case 16:
+      case 18:
+        cloudY = 50 - 10;
+        break;
+      case 15:
+      case 17:
+      case 19:
+        cloudY = 50 + 20;
+        break;
+    }
+  }
 
   while(iTrees < 9) {
     let tree = Tree(Vector(treePositionX, treeYone), Vector(treePositionX, treeYtwo), 15, 'square', '#614126', ctx, Vector(treePositionX, leaveY), 35, leavesColor, true);
@@ -44,7 +114,7 @@ function draw () {
     treePositionX = treePositionX + 100;
 
     tree.update();
-    trees.push(tree);
+    pool.push(tree);
     iTrees++;
 
     switch(iTrees) {
@@ -90,41 +160,13 @@ function draw () {
        break;
 
     }
-
-  }
-
-  while(i < 6) {
-    let building = Rectangle(Vector(buildingX, buildingY), 150, 400, true, '#95a5a6', true, '#7f8c8d', 3, ctx, true);
-
-    buildingX = buildingX + 250;
-    buildingY = buildingY + 30;
-
-    building.update();
-    buildings.push(building);
-    i++;
-
-    switch(i) {
-      case 3:
-      case 5:
-        buildingY = buildingY - 50;
-        break;
-    }
   }
 
   function update() {
     ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-    buildings.forEach(function (building) {
-        building.update();
+    pool.forEach(function (pool) {
+        pool.update();
     }, this);
-
-    windows.forEach(function (window) {
-      window.update();
-    }, this);
-
-    trees.forEach(function (tree) {
-      tree.update();
-    }, this);
-
     truck.update();
 
     animationId = requestAnimationFrame(update);
@@ -135,7 +177,7 @@ function draw () {
   while(iWindows < 292) {
     let window   = Rectangle(Vector(windowX + 5, windowY  + 200), 20, 20, true, windowColor, true, '#000', 2, ctx, true);
     windowX = windowX + 30;
-    windows.push(window);
+    pool.push(window);
     iWindows++;
 
     switch(iWindows) {
@@ -442,4 +484,5 @@ window.addEventListener('resize', resizeCanvas, false);
     canvas.height = 400;
   }
 
-draw();
+
+window.addEventListener('load', draw(), false);
