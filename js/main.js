@@ -3,7 +3,7 @@ let ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = 400;
 ctx.translate(canvas.width / 2, canvas.height / 2);
-let truck = Truck(Vector(canvas.width / 2.5, 200), ctx);
+var truck = Truck(Vector(canvas.width/2 - 115, 200), ctx);
 
 function getTime () {
   let time = new Date().getHours();
@@ -431,5 +431,15 @@ function draw () {
 
   }
 }
+
+window.addEventListener('resize', resizeCanvas, false);
+  window.addEventListener('orientationchange', resizeCanvas, false);
+  resizeCanvas();
+  function resizeCanvas() {
+    truck.position.x = canvas.width / 2 - 115;
+    truck.wheell.position.x = truck.position.x + 60;
+    canvas.width = window.innerWidth;
+    canvas.height = 400;
+  }
 
 draw();
