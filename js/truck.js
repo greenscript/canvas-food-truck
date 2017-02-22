@@ -11,10 +11,10 @@ function Truck(position, context) {
         return new Truck(position, context);
     }
 
-    this.topColor = '#e67e22';
-    this.bottomColor = '#ffdc00';
+    this.topColor = 'white';
+    this.bottomColor = 'red';
     this.windowColor = '#454545';
-    this.color1 = 'orangered';
+    this.color1 = 'green';
     this.context = context;
     this.position = position;
     this.truckWidth = 230;
@@ -60,7 +60,7 @@ Truck.prototype.render = function () {
     hline = Line(Vector(this.position.x + 42, this.position.y - 10), Vector(this.position.x + 44, this.position.y - 5), 4, 'round', '#355065', this.context);
 
     //Llanta o covertor de la llanta trasera
-    let backTire = Line(Vector(this.position.x, this.position.y + 95), Vector(this.position.x, this.position.y + 130), 25, 'round', '#910e1a', this.context);
+    let backTire = Line(Vector(this.position.x, this.position.y + 95), Vector(this.position.x, this.position.y + 130), 25, 'round', 'green', this.context);
 
     //Parte de la carroseria superior
     this.context.fillStyle = this.topColor;

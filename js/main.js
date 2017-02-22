@@ -14,10 +14,10 @@ function getTime () {
   return mid;
 }
 
-let windowColor = (getTime() === 'am') ? '#add8e6' : 'rgba(241, 196, 15, 1)';
-let canvasSky = (getTime() === 'am')   ? 'rgba(52, 152, 219, 0.8)' : 'rgba(44, 62, 80, 0.8)';
 let leavesColor = (getTime() === 'am') ? '#329932' : '#019875';
 let cloudColor = (getTime() === 'am')  ? '#ecf0f1' : '#7f8c8d';
+let windowColor = (getTime() === 'am') ? '#add8e6' : 'rgba(241, 196, 15, 1)';
+let canvasSky = (getTime() === 'am')   ? 'rgba(52, 152, 219, 0.8)' : 'rgba(44, 62, 80, 0.8)';
 
 canvas.style.backgroundColor = canvasSky;
 
